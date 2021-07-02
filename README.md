@@ -1,4 +1,5 @@
 # api-ewally
+<<<<<<< HEAD
 <p align="center">Projeto criado para o desafio de NodeJS para a empresa Ewally</p>
 
 
@@ -14,3 +15,6 @@
     * [Tecnologias](#tecnologias)
      *NodeJS
 <!--te-->
+=======
+Projeto criado para o desafio teste para empresa Ewally
+>>>>>>> e7a5b40b3c2f4c62226a028da4df3978a9dcb49c
