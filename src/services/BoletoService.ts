@@ -1,7 +1,9 @@
 class BoletoService {
   setCodigo(codigo: string) {
-    return this.validaLinhaDigitavel(codigo)
+    return this.validaLinhaDigitavel(codigo);
   }
+
+  setCodigoArrecadacao(codigo: string) {}
 
   validaLinhaDigitavel(codigo: string) {
     let regex = new RegExp(/^[0-9]{47}$/);
@@ -27,9 +29,9 @@ class BoletoService {
     ];
     let vencimento = Number(codigo.substring(33, 37));
     let valorSemVirgula = codigo.substring(37, 45);
-    let virgulaValor = codigo.substring(45,47);
+    let virgulaValor = codigo.substring(45, 47);
 
-    let valorTotal = Number(valorSemVirgula.concat('.' +virgulaValor))
+    let valorTotal = Number(valorSemVirgula.concat("." + virgulaValor));
 
     let validNumbers = blocos.map((vals) => {
       return this.sum(vals.num);
@@ -48,8 +50,8 @@ class BoletoService {
 
     return {
       valorTotal: valorTotal.toFixed(2),
-      dataVencimento: date
-    }
+      dataVencimento: date,
+    };
   }
 
   sum(str: string) {
@@ -60,6 +62,18 @@ class BoletoService {
       return acc + soma;
     }, 0);
     return Math.ceil(somatorio / 10) * 10 - somatorio;
+  }
+
+  validaLinhaDigitavelForArrecadacao(codigo: string) {
+    let regex = new RegExp(/^[0-9]{48}$/);
+
+    const codigoMoeda = Number(codigo[2]);
+
+    if(!regex.test(codigo) || Number(codigo[0]) == 8) {
+      throw new Error('Linha digitavel informada esta errada')
+    }
+
+    //TODO Validação boletos de convênio
   }
 }
 export default BoletoService;
